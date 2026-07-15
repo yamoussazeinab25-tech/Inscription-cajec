@@ -960,8 +960,8 @@ form.addEventListener('submit', (e)=>{
   })
   .then(res => {
     if(!res.ok) throw new Error('submit failed');
-    document.getElementById('recapText').textContent = recap;
-    document.getElementById('waBtn').href = `https://wa.me/?text=${encodeURIComponent(recap)}`;
+    document.getElementById('recapText').textContent = recap.replace(/\*/g, '');
+    document.getElementById('waBtn').href = `https://wa.me/22791279819?text=${encodeURIComponent(recap)}`;
     form.style.display = 'none';
     document.querySelector('.fuse-wrap').style.display = 'none';
     document.getElementById('confirmZone').classList.add('show');
