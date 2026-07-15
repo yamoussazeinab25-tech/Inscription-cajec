@@ -819,16 +819,19 @@ function validateField(field){
   const required = field.dataset.required === 'true';
   if(!required) return true;
   let valid = true;
-  const textInput = field.querySelector('input[type=text], input[type=tel], input[type=number], input[type=email], textarea');
+  // radios/checkboxes are checked first: fields like "Statut" or "Talents" contain a
+  // hidden "Autre" text input that must NOT be used to judge validity unless it's the
+  // only kind of control present in the field.
   const radios = field.querySelectorAll('input[type=radio]');
   const singleCheckbox = field.querySelectorAll('input[type=checkbox]');
+  const textInput = field.querySelector('input[type=text], input[type=tel], input[type=number], input[type=email], textarea');
 
-  if(textInput){
-    valid = textInput.value.trim().length > 0;
-  } else if(radios.length){
+  if(radios.length){
     valid = Array.from(radios).some(r=>r.checked);
   } else if(singleCheckbox.length){
     valid = Array.from(singleCheckbox).some(c=>c.checked);
+  } else if(textInput){
+    valid = textInput.value.trim().length > 0;
   }
   field.classList.toggle('invalid', !valid);
   return valid;
