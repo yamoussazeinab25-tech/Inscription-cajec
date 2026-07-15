@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscription — Grande Rentrée Club d'Art Oratoire CAJEC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1712;
+    --ink-soft:#5B5147;
+    --paper:#F3ECDD;
+    --paper-2:#EAE1CC;
+    --ember:#E08A2C;
+    --ember-deep:#C4451F;
+    --ember-pale:#F6D9AE;
+    --line:rgba(28,23,18,.14);
+    --ok:#3E6B4F;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ===== HERO TICKET ===== */
+  .ticket-outer{
+    background:var(--ink);
+    color:var(--paper);
+    margin:0 0 0;
+    padding:38px 20px 34px;
+    position:relative;
+    overflow:hidden;
+  }
+  .ticket-outer::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(224,138,44,.35), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(196,69,31,.30), transparent 50%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ember-pale);
+    font-weight:700;
+    position:relative;
+    z-index:1;
+  }
+  .hero-title{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:2.5rem;
+    line-height:1.05;
+    margin:.5rem 0 .25rem;
+    position:relative;
+    z-index:1;
+  }
+  .hero-title em{
+    font-style:italic;
+    color:var(--ember);
+  }
+  .hero-sub{
+    font-size:.95rem;
+    color:var(--paper-2);
+    margin:0 0 22px;
+    position:relative;
+    z-index:1;
+  }
+  .stub{
+    position:relative;
+    z-index:1;
+    display:flex;
+    border:1.5px dashed rgba(243,236,221,.4);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .stub-main{
+    flex:1;
+    padding:16px 18px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px 10px;
+  }
+  .stub-item .k{
+    font-size:.62rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ember-pale);
+    display:block;
+    margin-bottom:3px;
+  }
+  .stub-item .v{
+    font-family:'Fraunces',serif;
+    font-size:1.1rem;
+    font-weight:600;
+  }
+  .stub-badge{
+    width:96px;
+    flex-shrink:0;
+    background:var(--ember);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    border-left:1.5px dashed rgba(243,236,221,.4);
+  }
+  .stub-badge span{
+    transform:rotate(-90deg);
+    white-space:nowrap;
+    font-weight:800;
+    font-size:.72rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink);
+  }
+  .stub-badge::before,.stub-badge::after{
+    content:"";
+    position:absolute;
+    left:-7px;
+    width:14px;height:14px;
+    background:var(--ink);
+    border-radius:50%;
+  }
+  .stub-badge::before{top:-7px;}
+  .stub-badge::after{bottom:-7px;}
+
+  /* ===== FUSE PROGRESS ===== */
+  .fuse-wrap{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--paper);
+    padding:14px 20px 10px;
+    border-bottom:1px solid var(--line);
+  }
+  .fuse{
+    max-width:640px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+  }
+  .fuse::before{
+    content:"";
+    position:absolute;
+    left:10px;right:10px;top:9px;
+    height:2px;
+    background:var(--line);
+    z-index:0;
+  }
+  .fuse-dot{
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+  }
+  .fuse-dot .c{
+    width:20px;height:20px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--line);
+    transition:.35s;
+  }
+  .fuse-dot.lit .c{
+    background:var(--ember);
+    border-color:var(--ember-deep);
+    box-shadow:0 0 0 4px rgba(224,138,44,.25);
+  }
+  .fuse-dot .l{
+    font-size:.6rem;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:700;
+  }
+  .fuse-dot.lit .l{color:var(--ember-deep);}
+
+  /* ===== FORM SECTIONS ===== */
+  form{margin-top:8px;}
+  .part{
+    padding:34px 0 10px;
+    border-bottom:1px solid var(--line);
+  }
+  .part:last-of-type{border-bottom:none;}
+  .part-eyebrow{
+    font-size:.72rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ember-deep);
+    font-weight:800;
+    margin-bottom:6px;
+  }
+  .part-title{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    margin:0 0 6px;
+  }
+  .part-note{
+    font-size:.85rem;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+    font-style:italic;
+  }
+
+  .field{margin-bottom:22px;}
+  .field label.q{
+    display:block;
+    font-weight:700;
+    font-size:.95rem;
+    margin-bottom:4px;
+  }
+  .field .req{color:var(--ember-deep); font-weight:700;}
+  .field .hint{
+    font-size:.8rem;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  input[type=text], input[type=number], input[type=email], input[type=tel], textarea{
+    width:100%;
+    font-family:'Manrope',sans-serif;
+    font-size:.95rem;
+    padding:11px 13px;
+    border:1.5px solid var(--line);
+    border-radius:9px;
+    background:#fff;
+    color:var(--ink);
+    outline:none;
+    transition:.2s;
+  }
+  input:focus, textarea:focus{
+    border-color:var(--ember);
+    box-shadow:0 0 0 3px rgba(224,138,44,.18);
+  }
+  textarea{resize:vertical;min-height:70px;}
+
+  .choice-list{display:flex;flex-direction:column;gap:8px;}
+  .choice{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:11px 13px;
+    border:1.5px solid var(--line);
+    border-radius:9px;
+    background:#fff;
+    cursor:pointer;
+    transition:.15s;
+  }
+  .choice:hover{border-color:var(--ember);}
+  .choice input{margin-top:2px;accent-color:var(--ember-deep);width:16px;height:16px;flex-shrink:0;}
+  .choice .ctext{font-size:.92rem;line-height:1.35;}
+  .choice .ctext b{display:block;font-size:.92rem;}
+  .choice .ctext small{color:var(--ink-soft);}
+  .choice.checked{
+    border-color:var(--ember-deep);
+    background:linear-gradient(0deg, rgba(224,138,44,.08), rgba(224,138,44,.08));
+  }
+
+  .autre-input{margin-top:8px;display:none;}
+  .autre-input.show{display:block;}
+
+  .charcount{
+    text-align:right;
+    font-size:.72rem;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+
+  .error-msg{
+    display:none;
+    color:var(--ember-deep);
+    font-size:.8rem;
+    font-weight:700;
+    margin-top:6px;
+  }
+  .field.invalid input:not([type=checkbox]):not([type=radio]),
+  .field.invalid textarea{
+    border-color:var(--ember-deep);
+    background:#FBF1E8;
+  }
+  .field.invalid .error-msg{display:block;}
+  .field.invalid .choice{border-color:var(--ember-deep);}
+
+  /* submit */
+  .submit-zone{padding:30px 0 10px;}
+  button.submit-btn{
+    width:100%;
+    background:linear-gradient(135deg, var(--ember), var(--ember-deep));
+    color:#fff;
+    border:none;
+    padding:17px 20px;
+    border-radius:11px;
+    font-family:'Manrope',sans-serif;
+    font-weight:800;
+    font-size:1rem;
+    letter-spacing:.02em;
+    cursor:pointer;
+    box-shadow:0 8px 20px -6px rgba(196,69,31,.55);
+    transition:.15s;
+  }
+  button.submit-btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px -6px rgba(196,69,31,.65);}
+  button.submit-btn:active{transform:translateY(0);}
+  button.submit-btn:disabled{opacity:.65;cursor:default;}
+  .submit-hint{
+    text-align:center;
+    font-size:.78rem;
+    color:var(--ink-soft);
+    margin-top:10px;
+  }
+  .submit-error{
+    display:none;
+    text-align:center;
+    font-size:.85rem;
+    color:var(--ember-deep);
+    font-weight:700;
+    margin-top:12px;
+  }
+  .submit-error.show{display:block;}
+
+  /* ===== CONFIRMATION ===== */
+  .confirm{
+    display:none;
+    padding:40px 0 60px;
+    text-align:center;
+  }
+  .confirm.show{display:block;}
+  .flame{
+    width:64px;height:64px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    background:radial-gradient(circle, var(--ember), var(--ember-deep));
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.8rem;
+    box-shadow:0 0 0 8px rgba(224,138,44,.18);
+  }
+  .confirm h2{
+    font-family:'Fraunces',serif;
+    font-size:1.6rem;
+    margin:0 0 8px;
+  }
+  .confirm p.lead{color:var(--ink-soft);margin:0 0 26px;font-size:.95rem;}
+  .recap{
+    text-align:left;
+    background:#fff;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:18px 20px;
+    font-size:.85rem;
+    white-space:pre-wrap;
+    line-height:1.6;
+    margin-bottom:22px;
+    max-height:340px;
+    overflow-y:auto;
+  }
+  .confirm-actions{display:flex;flex-direction:column;gap:10px;}
+  .btn-outline, .btn-whatsapp{
+    display:block;
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    font-weight:700;
+    font-size:.92rem;
+    text-decoration:none;
+    cursor:pointer;
+    border:1.5px solid var(--ink);
+    background:transparent;
+    color:var(--ink);
+  }
+  .btn-whatsapp{
+    background:#25D366;
+    border-color:#25D366;
+    color:#0b2f1a;
+  }
+  .copied-flag{
+    font-size:.78rem;
+    color:var(--ok);
+    font-weight:700;
+    margin-top:6px;
+    display:none;
+  }
+  footer.note{
+    text-align:center;
+    font-size:.75rem;
+    color:var(--ink-soft);
+    padding:20px 0 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="ticket-outer">
+  <div class="wrap" style="padding:0;">
+    <div class="eyebrow">CAJEC · Club d'Art Oratoire</div>
+    <h1 class="hero-title">Grande <em>Rentrée</em></h1>
+    <p class="hero-sub">Ta parole est une étincelle. Viens l'allumer avec nous.</p>
+    <div class="stub">
+      <div class="stub-main">
+        <div class="stub-item"><span class="k">Date</span><span class="v">18 Juil. 2026</span></div>
+        <div class="stub-item"><span class="k">Heure</span><span class="v">16h00</span></div>
+        <div class="stub-item"><span class="k">Lieu</span><span class="v">ESPIM</span></div>
+        <div class="stub-item"><span class="k">Accès</span><span class="v">Badge Pass</span></div>
+      </div>
+      <div class="stub-badge"><span>Pass Gratuit</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="fuse-wrap">
+  <div class="fuse">
+    <div class="fuse-dot" data-dot="1"><div class="c"></div><div class="l">Infos</div></div>
+    <div class="fuse-dot" data-dot="2"><div class="c"></div><div class="l">Motiv.</div></div>
+    <div class="fuse-dot" data-dot="3"><div class="c"></div><div class="l">Talents</div></div>
+    <div class="fuse-dot" data-dot="4"><div class="c"></div><div class="l">Validation</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+<form id="regForm" novalidate action="https://formsubmit.co/cajecentre@gmail.com" method="POST">
+
+  <section class="part" data-part="1">
+    <div class="part-eyebrow">Partie 1</div>
+    <h2 class="part-title">Informations personnelles</h2>
+
+    <div class="field" data-required="true">
+      <label class="q">1. Nom et Prénom <span class="req">*</span></label>
+      <input type="text" name="nom" autocomplete="name">
+      <div class="error-msg">Merci d'indiquer ton nom et prénom.</div>
+    </div>
+
+    <div class="field" data-required="true">
+      <label class="q">2. Numéro WhatsApp <span class="req">*</span></label>
+      <input type="tel" name="whatsapp" placeholder="Ex: 96 00 00 00" autocomplete="tel">
+      <div class="error-msg">Merci d'indiquer un numéro WhatsApp.</div>
+    </div>
+
+    <div class="field">
+      <label class="q">3. Email <span style="color:var(--ink-soft);font-weight:500;">(optionnel)</span></label>
+      <input type="email" name="email" autocomplete="email">
+    </div>
+
+    <div class="field" data-required="true">
+      <label class="q">4. Statut <span class="req">*</span></label>
+      <div class="choice-list" data-group="statut">
+        <label class="choice"><input type="radio" name="statut" value="Élève"><span class="ctext"><b>Élève</b></span></label>
+        <label class="choice"><input type="radio" name="statut" value="Étudiant"><span class="ctext"><b>Étudiant</b></span></label>
+        <label class="choice"><input type="radio" name="statut" value="Professionnel"><span class="ctext"><b>Professionnel</b></span></label>
+        <label class="choice"><input type="radio" name="statut" value="Autre" data-reveals="statut-autre"><span class="ctext"><b>Autre</b></span></label>
+      </div>
+      <div class="autre-input" id="statut-autre">
+        <input type="text" name="statut_autre" placeholder="Précise ton statut">
+      </div>
+      <div class="error-msg">Choisis une option.</div>
+    </div>
+
+    <div class="field" data-required="true">
+      <label class="q">5. Âge <span class="req">*</span></label>
+      <input type="number" name="age" min="1" max="120" inputmode="numeric">
+      <div class="error-msg">Merci d'indiquer ton âge.</div>
+    </div>
+
+    <div class="field" data-required="true">
+      <label class="q">6. Ville de résidence <span class="req">*</span></label>
+      <input type="text" name="ville" placeholder="Ex: Niamey">
+      <div class="error-msg">Merci d'indiquer ta ville.</div>
+    </div>
+  </section>
+
+  <section class="part" data-part="2">
+    <div class="part-eyebrow">Partie 2</div>
+    <h2 class="part-title">Motivation &amp; conditions</h2>
+    <p class="part-note">Ces questions servent à vérifier la compréhension et l'engagement.</p>
+
+    <div class="field" data-required="true">
+      <label class="q">7. Pourquoi veux-tu rejoindre le Club d'Art Oratoire ? <span class="req">*</span></label>
+      <div class="hint">Réponse courte — 3 lignes max</div>
+      <textarea name="motivation" maxlength="300" rows="3"></textarea>
+      <div class="charcount">0/300</div>
+      <div class="error-msg">Merci de répondre à cette question.</div>
+    </div>
+
+    <div class="field" data-required="true">
+      <label class="q">8. Es-tu disponible le 18 Juillet 2026 à 16H à ESPIM pour la rentrée, et prêt(e) à participer aux séances régulières ? <span class="req">*</span></label>
+      <div class="choice-list" data-group="disponible">
+        <label class="choice"><input type="radio" name="disponible" value="Oui, je serai présent(e) et assidu(e)"><span class="ctext"><b>Oui, je serai présent(e) et assidu(e)</b></span></label>
+        <label class="choice"><input type="radio" name="disponible" value="Non"><span class="ctext"><b>Non</b></span></label>
+      </div>
+      <div class="error-msg">Choisis une option.</div>
+    </div>
+
+    <div class="field" data-required="true">
+      <label class="q">9. Que signifie pour toi cette phrase : « La parole n'est pas un simple souffle ; c'est l'étincelle qui allume les esprits » ? <span class="req">*</span></label>
+      <div class="hint">But : voir la capacité de réflexion et de compréhension</div>
+      <textarea name="reflexion" maxlength="400" rows="3"></textarea>
+      <div class="error-msg">Merci de répondre à cette question.</div>
+    </div>
+
+    <div class="field" data-required="true">
+      <label class="q">10. Es-tu prêt(e) à respecter la discipline du club : ponctualité, respect, participation active ? <span class="req">*</span></label>
+      <label class="choice">
+        <input type="checkbox" name="engagement" value="Oui je m'engage">
+        <span class="ctext"><b>Oui, je m'engage</b></span>
+      </label>
+      <div class="error-msg">Cette case doit être cochée pour t'inscrire.</div>
+    </div>
+  </section>
+
+  <section class="part" data-part="3">
+    <div class="part-eyebrow">Partie 3</div>
+    <h2 class="part-title">Détection de talents</h2>
+    <p class="part-note">Ces questions nous aident à t'orienter dans la bonne équipe.</p>
+
+    <div class="field" data-required="true">
+      <label class="q">11. As-tu déjà fait de la prise de parole en public ? <span class="req">*</span></label>
+      <div class="choice-list" data-group="experience">
+        <label class="choice"><input type="radio" name="experience" value="Jamais"><span class="ctext"><b>Jamais</b></span></label>
+        <label class="choice"><input type="radio" name="experience" value="1 à 3 fois"><span class="ctext"><b>1 à 3 fois</b><small>école, église, mosquée, famille</small></span></label>
+        <label class="choice"><input type="radio" name="experience" value="Régulièrement"><span class="ctext"><b>Régulièrement</b><small>débats, conférences, présentations</small></span></label>
+      </div>
+      <div class="error-msg">Choisis une option.</div>
+    </div>
+
+    <div class="field">
+      <label class="q">12. Parmi ces domaines, lequel t'attire le plus ?</label>
+      <div class="hint">Choix multiple</div>
+      <div class="choice-list">
+        <label class="choice"><input type="checkbox" name="domaines" value="Éloquence & Discours"><span class="ctext"><b>Éloquence & Discours</b><small>Faire des discours qui touchent</small></span></label>
+        <label class="choice"><input type="checkbox" name="domaines" value="Débat & Argumentation"><span class="ctext"><b>Débat & Argumentation</b><small>Défendre ses idées face aux autres</small></span></label>
+        <label class="choice"><input type="checkbox" name="domaines" value="Animation & Présentation"><span class="ctext"><b>Animation & Présentation</b><small>Animer des événements, MC</small></span></label>
+        <label class="choice"><input type="checkbox" name="domaines" value="Théâtre & Expression corporelle"><span class="ctext"><b>Théâtre & Expression corporelle</b><small>Jeu d'acteur, langage corporel</small></span></label>
+        <label class="choice"><input type="checkbox" name="domaines" value="Leadership & Formation"><span class="ctext"><b>Leadership & Formation</b><small>Former et inspirer d'autres personnes</small></span></label>
+        <label class="choice"><input type="checkbox" name="domaines" value="Rédaction de discours"><span class="ctext"><b>Rédaction de discours</b><small>Écrire des discours percutants</small></span></label>
+      </div>
+    </div>
+
+    <div class="field" data-required="true">
+      <label class="q">13. Cite un sujet sur lequel tu pourrais parler pendant 3 minutes sans préparation. <span class="req">*</span></label>
+      <div class="hint">Ex : L'éducation, La jeunesse, Le leadership</div>
+      <input type="text" name="sujet">
+      <div class="error-msg">Merci d'indiquer un sujet.</div>
+    </div>
+
+    <div class="field">
+      <label class="q">14. As-tu un talent particulier lié à la communication ?</label>
+      <div class="hint">Choix multiple</div>
+      <div class="choice-list">
+        <label class="choice"><input type="checkbox" name="talents" value="Bonne voix / Chant"><span class="ctext"><b>Bonne voix / Chant</b></span></label>
+        <label class="choice"><input type="checkbox" name="talents" value="Sens de l'humour"><span class="ctext"><b>Sens de l'humour</b></span></label>
+        <label class="choice"><input type="checkbox" name="talents" value="Écriture / Poésie"><span class="ctext"><b>Écriture / Poésie</b></span></label>
+        <label class="choice"><input type="checkbox" name="talents" value="Charisme naturel"><span class="ctext"><b>Charisme naturel</b></span></label>
+        <label class="choice"><input type="checkbox" name="talents" value="Aucun pour le moment mais je veux apprendre"><span class="ctext"><b>Aucun pour le moment, mais je veux apprendre</b></span></label>
+        <label class="choice"><input type="checkbox" name="talents" value="Autre" data-reveals="talents-autre"><span class="ctext"><b>Autre</b></span></label>
+      </div>
+      <div class="autre-input" id="talents-autre">
+        <input type="text" name="talents_autre" placeholder="Précise ton talent">
+      </div>
+    </div>
+  </section>
+
+  <section class="part" data-part="4">
+    <div class="part-eyebrow">Partie 4</div>
+    <h2 class="part-title">Validation</h2>
+
+    <div class="field">
+      <label class="q">15. Comment as-tu connu l'événement ?</label>
+      <div class="hint">Choix multiple</div>
+      <div class="choice-list">
+        <label class="choice"><input type="checkbox" name="source" value="Affiche"><span class="ctext"><b>Affiche</b></span></label>
+        <label class="choice"><input type="checkbox" name="source" value="Facebook @cajec"><span class="ctext"><b>Facebook</b><small>@cajec</small></span></label>
+        <label class="choice"><input type="checkbox" name="source" value="TikTok @cajecniger"><span class="ctext"><b>TikTok</b><small>@cajecniger</small></span></label>
+        <label class="choice"><input type="checkbox" name="source" value="Bouche à oreille"><span class="ctext"><b>Bouche à oreille</b></span></label>
+        <label class="choice"><input type="checkbox" name="source" value="Autre" data-reveals="source-autre"><span class="ctext"><b>Autre</b></span></label>
+      </div>
+      <div class="autre-input" id="source-autre">
+        <input type="text" name="source_autre" placeholder="Précise">
+      </div>
+    </div>
+
+    <div class="field" data-required="true">
+      <label class="choice">
+        <input type="checkbox" name="whatsapp_opt_in" value="oui">
+        <span class="ctext"><b>16. J'accepte de recevoir les infos du club par WhatsApp</b> <span class="req">*</span></span>
+      </label>
+      <div class="error-msg">Cette case doit être cochée pour valider l'inscription.</div>
+    </div>
+  </section>
+
+  <div class="submit-zone">
+    <button type="submit" class="submit-btn" id="submitBtn">Envoyer ma demande de badge pass gratuit</button>
+    <p class="submit-hint">Réponse traitée par le Club d'Art Oratoire CAJEC</p>
+    <p class="submit-error" id="submitError">Une erreur est survenue. Réessaie ou contacte-nous directement.</p>
+  </div>
+
+  <input type="hidden" name="_subject" value="Nouvelle inscription CAJEC">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+</form>
+
+<div class="confirm" id="confirmZone">
+  <div class="flame">🔥</div>
+  <h2>C'est envoyé !</h2>
+  <p class="lead">Ton étincelle est allumée. Le CAJEC a bien reçu ta demande par email. Voici le récapitulatif — tu peux aussi l'envoyer sur WhatsApp pour aller plus vite.</p>
+  <div class="recap" id="recapText"></div>
+  <div class="confirm-actions">
+    <a href="#" class="btn-whatsapp" id="waBtn" target="_blank" rel="noopener">Envoyer via WhatsApp</a>
+    <button type="button" class="btn-outline" id="copyBtn">Copier le récapitulatif</button>
+    <div class="copied-flag" id="copiedFlag">Récapitulatif copié ✓</div>
+  </div>
+</div>
+
+<footer class="note">CAJEC — Club d'Art Oratoire · Grande Rentrée · 18 Juillet 2026</footer>
+</div>
+
+<script>
+const form = document.getElementById('regForm');
+
+// reveal "Autre" fields
+document.querySelectorAll('[data-reveals]').forEach(input=>{
+  input.addEventListener('change', ()=>{
+    const target = document.getElementById(input.dataset.reveals);
+    if(!target) return;
+    target.classList.toggle('show', input.checked);
+  });
+});
+
+// highlight selected choice cards
+document.querySelectorAll('.choice input').forEach(inp=>{
+  inp.addEventListener('change', ()=>{
+    if(inp.type === 'radio'){
+      document.querySelectorAll(`input[name="${inp.name}"]`).forEach(sib=>{
+        sib.closest('.choice').classList.toggle('checked', sib.checked);
+      });
+    } else {
+      inp.closest('.choice').classList.toggle('checked', inp.checked);
+    }
+  });
+});
+
+// character counter for motivation
+const motivation = form.querySelector('textarea[name="motivation"]');
+const counter = motivation.closest('.field').querySelector('.charcount');
+motivation.addEventListener('input', ()=>{
+  counter.textContent = `${motivation.value.length}/300`;
+});
+
+// fuse progress via IntersectionObserver
+const dots = document.querySelectorAll('.fuse-dot');
+const parts = document.querySelectorAll('.part');
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const idx = e.target.dataset.part;
+      dots.forEach(d=>{
+        if(parseInt(d.dataset.dot) <= parseInt(idx)) d.classList.add('lit');
+      });
+    }
+  });
+}, {threshold:0.3, rootMargin:"-80px 0px -60% 0px"});
+parts.forEach(p=>obs.observe(p));
+
+// validation + submit
+function validateField(field){
+  const required = field.dataset.required === 'true';
+  if(!required) return true;
+  let valid = true;
+  const textInput = field.querySelector('input[type=text], input[type=tel], input[type=number], textarea');
+  const radios = field.querySelectorAll('input[type=radio]');
+  const singleCheckbox = field.querySelectorAll('input[type=checkbox]');
+
+  if(textInput){
+    valid = textInput.value.trim().length > 0;
+  } else if(radios.length){
+    valid = Array.from(radios).some(r=>r.checked);
+  } else if(singleCheckbox.length){
+    valid = Array.from(singleCheckbox).some(c=>c.checked);
+  }
+  field.classList.toggle('invalid', !valid);
+  return valid;
+}
+
+function buildRecap(fd){
+  const val = (name) => fd.get(name) || '';
+  const valAll = (name) => fd.getAll(name).join(', ');
+
+  let statut = val('statut');
+  if(statut === 'Autre') statut = `Autre : ${val('statut_autre')}`;
+
+  let talentsList = fd.getAll('talents');
+  talentsList = talentsList.map(t => t === 'Autre' ? `Autre : ${val('talents_autre')}` : t);
+
+  let sourceList = fd.getAll('source');
+  sourceList = sourceList.map(s => s === 'Autre' ? `Autre : ${val('source_autre')}` : s);
+
+  return `*INSCRIPTION — GRANDE RENTRÉE CLUB D'ART ORATOIRE CAJEC*
+18 Juillet 2026 · 16H · ESPIM
+
+*Nom et Prénom :* ${val('nom')}
+*WhatsApp :* ${val('whatsapp')}
+*Email :* ${val('email') || '—'}
+*Statut :* ${statut}
+*Âge :* ${val('age')}
+*Ville :* ${val('ville')}
+
+*Motivation :* ${val('motivation')}
+*Disponible le 18/07 à 16H :* ${val('disponible')}
+*Sens donné à la phrase :* ${val('reflexion')}
+*Engagement discipline :* ${val('engagement') ? "Oui, je m'engage" : '—'}
+
+*Expérience prise de parole :* ${val('experience')}
+*Domaines d'intérêt :* ${valAll('domaines') || '—'}
+*Sujet 3 minutes :* ${val('sujet')}
+*Talents communication :* ${talentsList.join(', ') || '—'}
+
+*Comment connu l'événement :* ${sourceList.join(', ') || '—'}
+*Accepte infos WhatsApp :* ${val('whatsapp_opt_in') ? 'Oui' : 'Non'}`;
+}
+
+const submitBtn = document.getElementById('submitBtn');
+const submitError = document.getElementById('submitError');
+
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  let allValid = true;
+  document.querySelectorAll('.field[data-required="true"]').forEach(field=>{
+    if(!validateField(field)) allValid = false;
+  });
+
+  if(!allValid){
+    const firstInvalid = document.querySelector('.field.invalid');
+    if(firstInvalid) firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  const fd = new FormData(form);
+  const recap = buildRecap(fd);
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Envoi en cours...';
+  submitError.classList.remove('show');
+
+  fetch(form.action, {
+    method: 'POST',
+    body: fd,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(res => {
+    if(!res.ok) throw new Error('submit failed');
+    document.getElementById('recapText').textContent = recap;
+    document.getElementById('waBtn').href = `https://wa.me/?text=${encodeURIComponent(recap)}`;
+    form.style.display = 'none';
+    document.getElementById('confirmZone').classList.add('show');
+    document.getElementById('confirmZone').scrollIntoView({behavior:'smooth'});
+  })
+  .catch(() => {
+    submitError.classList.add('show');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Envoyer ma demande de badge pass gratuit';
+  });
+});
+
+document.getElementById('copyBtn').addEventListener('click', ()=>{
+  const text = document.getElementById('recapText').textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    const flag = document.getElementById('copiedFlag');
+    flag.style.display = 'block';
+    setTimeout(()=>flag.style.display='none', 2500);
+  });
+});
+</script>
+</body>
+</html>
