@@ -3,337 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - Club d'Art Oratoire CAJEC</title>
+    <title>Club d'Art Oratoire CAJEC</title>
     <style>
-        :root {
-            --primary: #d97706;
-            --primary-dark: #b45309;
-            --bg-dark: #1e1b18;
-            --bg-light: #fdfaf7;
-            --text-dark: #2d2621;
-            --border-color: #e5e1dc;
-        }
-
-        * {
-            box-sizing: border-box;
+        /* Remplissage de l'intégralité de l'écran */
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7ebd9; /* Votre fond beige d'origine */
+            color: #261202;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
         }
 
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        /* En-tête / Ticket style */
-        .header-ticket {
-            background-color: var(--bg-dark);
-            color: #fff;
-            padding: 30px 20px;
+        /* En-tête étiré sur toute la largeur */
+        .header {
+            background-color: #1a1512;
+            color: #f4c28d;
+            padding: 20px 10px;
             text-align: center;
-            border-bottom: 4px dashed var(--primary);
-            position: relative;
+            border-bottom: 3px dashed #d97d24;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .header-ticket h1 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        /* Conteneur principal plein écran */
+        .container {
+            width: 100%;
+            max-width: 100%;
+            flex: 1;
+            padding: 20px 15px;
+            box-sizing: border-box;
         }
 
-        .ticket-details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            max-width: 500px;
-            margin: 0 auto;
-            font-size: 0.9rem;
-            text-align: left;
-            border-left: 2px solid var(--primary);
-            padding-left: 15px;
-        }
-
-        .ticket-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: var(--primary);
-            color: #fff;
-            padding: 5px 10px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            transform: rotate(5deg);
-            border-radius: 3px;
-        }
-
-        /* Barre de progression */
-        .progress-container {
-            max-width: 600px;
-            margin: 30px auto 10px auto;
+        /* Barre de progression avec vos cercles d'origine */
+        .steps {
             display: flex;
             justify-content: space-between;
-            position: relative;
-            padding: 0 10px;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        .progress-container::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 0;
-            height: 2px;
-            width: 100%;
-            background-color: var(--border-color);
-            z-index: 1;
+        .step {
+            text-align: center;
+            font-size: 10px;
+            color: #8c7664;
+            flex: 1;
         }
-
-        .progress-line {
-            position: absolute;
-            top: 15px;
-            left: 0;
-            height: 2px;
-            width: 0%;
-            background-color: var(--primary);
-            z-index: 2;
-            transition: width 0.3s ease;
-        }
-
-        .step-dot {
-            width: 32px;
-            height: 32px;
+        .step-circle {
+            width: 24px;
+            height: 24px;
+            background-color: #e6dacb;
+            color: #fff;
             border-radius: 50%;
-            background-color: #fff;
-            border: 2px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-            position: relative;
-            z-index: 3;
-            transition: all 0.3s ease;
+            margin: 0 auto 5px auto;
         }
-
-        .step-dot.active {
-            border-color: var(--primary);
-            background-color: var(--primary);
-            color: white;
+        .step.active .step-circle {
+            background-color: #d97d24;
         }
-
-        .step-dot.completed {
-            border-color: var(--primary-dark);
-            background-color: var(--primary-dark);
-            color: white;
-        }
-
-        .step-label {
-            position: absolute;
-            top: 38px;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            color: #888;
-            white-space: nowrap;
-        }
-
-        .step-dot.active .step-label {
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* Formulaire */
-        .form-container {
-            max-width: 600px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .form-step {
+        
+        /* Sections dynamiques du formulaire */
+        .form-part {
             display: none;
+            max-width: 500px;
+            margin: 0 auto;
         }
-
-        .form-step.active {
+        .form-part.active {
             display: block;
         }
-
+        
+        .part-title {
+            color: #a65b1c;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
         h2 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--bg-dark);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 25px;
         }
-
-        .form-group {
+        .input-group {
             margin-bottom: 20px;
         }
-
         label {
             display: block;
-            font-weight: 600;
+            font-weight: bold;
             margin-bottom: 8px;
-            font-size: 0.95rem;
+            font-size: 15px;
         }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="number"],
-        textarea {
+        input[type="text"], input[type="email"], input[type="tel"], input[type="number"], textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
+            padding: 14px;
+            border: 1px solid #d9cbd5;
             border-radius: 6px;
-            font-size: 1rem;
-            background-color: #fafafa;
-            transition: border-color 0.2s;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
+            box-sizing: border-box;
             background-color: #fff;
+            font-size: 16px;
         }
-
-        /* Radio Options corrigés */
-        .options-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .radio-label {
+        
+        /* Grandes cases de choix d'origine */
+        .radio-box {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px;
-            border: 1px solid var(--border-color);
+            padding: 14px;
+            border: 1px solid #d9cbd5;
             border-radius: 6px;
+            margin-bottom: 12px;
             cursor: pointer;
-            font-weight: normal;
             background-color: #fff;
-            transition: background-color 0.2s;
         }
-
-        .radio-label:hover {
-            background-color: #fefaf6;
+        .radio-box input {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
         }
-
-        .radio-label input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary);
-        }
-
-        /* Boutons de navigation */
-        .btn-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
-        }
-
-        button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            flex: 1;
-        }
-
-        button.btn-next {
-            background-color: var(--primary);
+        
+        /* Vos boutons d'origine pleine largeur */
+        .btn-nav {
+            background-color: #d97d24;
             color: white;
-        }
-
-        button.btn-next:hover {
-            background-color: var(--primary-dark);
-        }
-
-        button.btn-prev {
-            background-color: #e5e1dc;
-            color: var(--text-dark);
-        }
-
-        button.btn-prev:hover {
-            background-color: #d1cbc4;
-        }
-
-        .note-text {
-            font-size: 0.85rem;
-            color: #666;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
             margin-top: 15px;
-            font-style: italic;
+            box-sizing: border-box;
+        }
+        .btn-nav:hover {
+            background-color: #b36214;
+        }
+        .btn-secondary {
+            background-color: #e6dacb;
+            color: #261202;
+            margin-top: 8px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Structure du haut style ticket -->
-    <div class="header-ticket">
-        <div class="ticket-badge">PASS GRATUIT</div>
-        <h1>Club d'Art Oratoire CAJEC</h1>
-        <div class="ticket-details">
-            <div><strong>DATE :</strong> 18 Juil. 2026</div>
-            <div><strong>HEURE :</strong> 16h00</div>
-            <div><strong>LIEU :</strong> ESPIM</div>
-            <div><strong>ACCÈS :</strong> Badge Pass</div>
+    <div class="header">
+        <h3 style="color: #d97d24; margin: 0; letter-spacing: 1px; font-size: 16px;">CLUB D'ART ORATOIRE CAJEC</h3>
+        <p style="margin: 5px 0 0 0; font-size: 12px;">DATE: 18 Juil. 2026 | HEURE: 16h00 | LIEU: ESPIM</p>
+    </div>
+
+    <div class="container">
+        <!-- BARRE DE PROGRESSION -->
+        <div class="steps">
+            <div class="step active" id="dot-1"><div class="step-circle">1</div>INFOS</div>
+            <div class="step" id="dot-2"><div class="step-circle">2</div>MOTIV</div>
+            <div class="step" id="dot-3"><div class="step-circle">3</div>TALENTS</div>
+            <div class="step" id="dot-4"><div class="step-circle">4</div>ACCOMP.</div>
+            <div class="step" id="dot-5"><div class="step-circle">5</div>VALIDATION</div>
         </div>
-    </div>
 
-    <!-- Barre de Progression Dynamique -->
-    <div class="progress-container">
-        <div class="progress-line" id="progress-line"></div>
-        <div class="step-dot active" id="dot-1">1<span class="step-label">Infos</span></div>
-        <div class="step-dot" id="dot-2">2<span class="step-label">Motiv</span></div>
-        <div class="step-dot" id="dot-3">3<span class="step-label">Talents</span></div>
-        <div class="step-dot" id="dot-4">4<span class="step-label">Accomp.</span></div>
-        <div class="step-dot" id="dot-5">5<span class="step-label">Validation</span></div>
-    </div>
-
-    <!-- Conteneur principal du Formulaire lié à FormSubmit -->
-    <div class="form-container">
-        <form action="https://formsubmit.co" method="POST" id="registrationForm">
-            
-            <!-- Désactive le captcha par défaut pour fluidifier -->
+        <form action="https://formsubmit.co" method="POST" id="mainForm">
             <input type="hidden" name="_captcha" value="false">
 
-            <!-- ÉTAPE 1 : Informations personnelles -->
-            <div class="form-step active" id="step-1">
-                <h2>PARTIE 1 : Informations personnelles</h2>
+            <!-- PARTIE 1 : INFOS (BUG DU STATUT RÉGULÉ) -->
+            <div class="form-part active" id="part-1">
+                <div class="part-title">Partie 1</div>
+                <h2>Informations personnelles</h2>
                 
-                <div class="form-group">
+                <div class="input-group">
                     <label>1. Nom et Prénom *</label>
-                    <input type="text" name="Nom_Prenom" required>
+                    <input type="text" name="Nom_Et_Prenom" required>
                 </div>
-
-                <div class="form-group">
+                <div class="input-group">
                     <label>2. Numéro WhatsApp *</label>
                     <input type="tel" name="WhatsApp" placeholder="Ex: 22778404908" required>
                 </div>
-
-                <div class="form-group">
+                <div class="input-group">
                     <label>3. Email (optionnel)</label>
                     <input type="email" name="Email">
                 </div>
-
-                <div class="form-group">
+                <div class="input-group">
                     <label>4. Statut *</label>
-                    <div class="options-group">
-                        <label class="radio-label"><input type="radio" name="Statut" value="Eleve" required> Élève</label>
-                        <label class="radio-label"><input type="radio" name="Statut" value="Etudiant"> Étudiant</label>
-                        <label class="radio-label"><input type="radio" name="Statut" value="Professionnel"> Professionnel</label>
-                        <label class="radio-label"><input type="radio" name="Statut" value="Autre"> Autre</label>
-                    </div>
+                    <label class="radio-box"><input type="radio" name="Statut" value="Eleve" required> Élève</label>
+                    <label class="radio-box"><input type="radio" name="Statut" value="Etudiant"> Étudiant</label>
+                    <label class="radio-box"><input type="radio" name="Statut" value="Professionnel"> Professionnel</label>
+                    <label class="radio-box"><input type="radio" name="Statut" value="Autre"> Autre</label>
+                </div>
+                <div class="input-group">
+                    <label>5. Âge *</label>
+                    <input type="number" name="Age" required>
+                </div>
+                <div class="input-group">
+                    <label>6. Ville de résidence *</label>
+                    <input type="text" name="Ville" value="Niamey" required>
+                </div>
+                
+                <button type="button" class="btn-nav" onclick="allerAPartie(2)">Suivant</button>
+            </div>
+
+            <!-- PARTIE 2 : MOTIV -->
+            <div class="form-part" id="part-2">
+                <div class="part-title">Partie 2</div>
+                <h2>Motivation & conditions</h2>
+                <div class="input-group">
+                    <label>7. Pourquoi veux-tu rejoindre le Club d'Art Oratoire ? *</label>
+                    <textarea name="Motivation" rows="4" required></textarea>
+                </div>
+                <button type="button" class="btn-nav" onclick="allerAPartie(3)">Suivant</button>
+                <button type="button" class="btn-nav btn-secondary" onclick="allerAPartie(1)">Retour</button>
+            </div>
+
+            <!-- PARTIE 3 : TALENTS -->
+            <div class="form-part" id="part-3">
+                <div class="part-title">Partie 3</div>
+                <h2>Talents & Compétences</h2>
+                <div class="input-group">
+                    <label>8. As-tu déjà une expérience en art oratoire ? *</label>
+                    <label class="radio-box"><input type="radio" name="Experience" value="Aucune" required> Aucune, débutant</label>
+                    <label class="radio-box"><input type="radio" name="Experience" value="Moyenne"> J'ai quelques bases</label>
+                </div>
+                <button type="button" class="btn-nav" onclick="allerAPartie(4)">Suivant</button>
+                <button type="button" class="btn-nav btn-secondary" onclick="allerAPartie(2)">Retour</button>
+            </div>
+
+            <!-- PARTIE 4 : ACCOMPAGNEMENT & CONTRIBUTION -->
+            <div class="form-part" id="part-4">
+                <div class="part-title">Partie 4</div>
+                <h2>Accompagnement & Contribution</h2>
+                
+                <div class="input-group">
+                    <label>17. Souhaites-tu bénéficier d’un accompagnement personnalisé/coaching en plus des séances du club ? *</label>
+                    <label class="radio-box"><input type="radio" name="Besoin_Coaching" value="Oui" id="coaching-oui" onchange="gererTarifs()" required> Oui, je suis intéressé(e)</label>
+                    <label class="radio-box"><input type="radio" name="Besoin_Coaching" value="Non" id="coaching-non" onchange="gererTarifs()"> Non, le club gratuit me suffit pour le moment</label>
                 </div>
 
-                <div class="form-group">
+                <div id="bloc-tarifs" style="display: none;">
+                    <div class="input-group">
+                        <label>18. Si oui, quelle est la fourchette de contribution mensuelle que tu peux prévoir ? *</label>
+                        <label class="radio-box"><input type="radio" name="Tarif" value="0-12000"> 0 à 12 000 FCFA : Accès base</label>
+                        <label class="radio-box"><input type="radio" name="Tarif" value="13000-41000"> 13 000 à 41 000 FCFA : Suivi + 1 séance ind./mois</label>
